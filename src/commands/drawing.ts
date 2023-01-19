@@ -20,6 +20,9 @@ export const draw = async (
     case 'draw_rectangle':
       await rectangle(sizeX, sizeY);
       break;
+    case 'draw_square':
+      await rectangle(sizeX, sizeX);
+      break;
     default:
   }
   await mouse.releaseButton(0);

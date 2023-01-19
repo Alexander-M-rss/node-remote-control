@@ -1,4 +1,5 @@
 import { mouse } from '@nut-tree/nut-js';
+import { IResult } from './type';
 
 export const navigationCommands = [
   'mouse_up',
@@ -12,7 +13,7 @@ export const navigateMouse = async (
   command: string,
   position: { x: number; y: number },
   delta: number
-) => {
+): Promise<IResult> => {
   let { x, y } = position;
   let res = '';
   let isResponseNeeded = false;

@@ -12,9 +12,9 @@ export const wsConnectionHandler = async (ws: WebSocket, req: IncomingMessage) =
 
     const [command, ...params] = data.split(' ');
     const [arg1, arg2] = params.map((x) => +x || 0);
-    const res = await commandsHandler(command, arg1, arg2);
+    const { isResponseNeeded, res } = await commandsHandler(command, arg1, arg2);
 
-    if (res) {
+    if (isResponseNeeded) {
       wsStream.write(`${res}\0`);
     }
   });

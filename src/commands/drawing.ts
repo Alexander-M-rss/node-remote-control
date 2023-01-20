@@ -33,20 +33,26 @@ export const draw = async (
   sizeY: number
 ) => {
   const mouseSpeed = mouse.config.mouseSpeed;
+  let log = `${command} `;
 
   await mouse.pressButton(0);
   switch (command) {
     case 'draw_rectangle':
       await rectangle(sizeX, sizeY);
+      log += `${sizeX} ${sizeY}`;
       break;
     case 'draw_square':
       await rectangle(sizeX, sizeX);
+      log += `${sizeX}`;
       break;
     case 'draw_circle':
       await circle(position, sizeX);
+      log += `${sizeX}`;
       break;
     default:
   }
   await mouse.releaseButton(0);
   mouse.config.mouseSpeed = mouseSpeed;
+
+  return log;
 };

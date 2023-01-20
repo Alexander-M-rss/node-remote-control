@@ -15,7 +15,7 @@ export const commandsHandler = async (
     result = await navigateMouse(command, position, arg1);
   }
   if (drawingCommands.includes(command)) {
-    await draw(command, position, arg1, arg2);
+    result.res = await draw(command, position, arg1, arg2);
   }
   if (result.res) {
     console.log(result.res);

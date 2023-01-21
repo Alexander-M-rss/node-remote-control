@@ -2,6 +2,7 @@ import { mouse } from '@nut-tree/nut-js';
 import { draw, drawingCommands } from './drawing.js';
 import { navigateMouse, navigationCommands } from './navigation.js';
 import { IResult } from './type.js';
+import { printScreen, printScreenCommand } from './printScreen.js';
 
 export const commandsHandler = async (
   command: string,
@@ -19,6 +20,12 @@ export const commandsHandler = async (
   }
   if (result.res) {
     console.log(result.res);
+  }
+  if (printScreenCommand === command) {
+    const { x, y } = position;
+
+    console.log(`${command} ${x} ${y}`);
+    result = { isResponseNeeded: true, res: await printScreen(x, y) };
   }
 
   return result;

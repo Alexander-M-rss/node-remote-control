@@ -6,11 +6,23 @@ const HTTP_PORT = 8181;
 const WS_PORT = 8080;
 
 httpServer.listen(HTTP_PORT, () => {
-  console.log(`Start static http server on the ${HTTP_PORT} port!`);
+  const addrInfo = httpServer.address();
+  let host = 'localhost';
+
+  if (typeof addrInfo !== 'string' && addrInfo?.address && addrInfo.address !== '::') {
+    host = addrInfo.address;
+  }
+  console.log(`Start static http server http://${host}:${HTTP_PORT}`);
 });
 
 const wsServer = new WebSocketServer({ port: WS_PORT }, () => {
-  console.log(`Start websocket server on the ${WS_PORT} port!`);
+  const addrInfo = wsServer.address();
+  let host = 'localhost';
+
+  if (typeof addrInfo !== 'string' && addrInfo?.address && addrInfo.address !== '::') {
+    host = addrInfo.address;
+  }
+  console.log(`Start websocket server ${host}:${WS_PORT}`);
 });
 
 wsServer.on('connection', wsConnectionHandler);
